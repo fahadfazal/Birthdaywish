@@ -3,41 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Happy Birthday My Queen!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Happy Birthday Rimsha!</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.1.0/dist/index.umd.js"></script> <!-- Fireworks -->
+  
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: url('https://images.unsplash.com/photo-1605727216805-27d01d005baa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Open Sans', sans-serif;
       overflow-x: hidden;
       position: relative;
-      color: #fff;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1;
     }
 
     .container {
       text-align: center;
       padding: 100px 20px 50px 20px;
-      position: relative;
-      z-index: 2;
+      color: white;
     }
 
     h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 80px;
-      background: linear-gradient(45deg, #ffd1dc, #fcb045);
+      font-family: 'Dancing Script', cursive;
+      font-size: 70px;
+      background: linear-gradient(45deg, #ff6ec4, #7873f5);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: glow 2s infinite alternate;
@@ -45,21 +37,21 @@
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 10px #ffd1dc; }
-      to { text-shadow: 0 0 30px #fcb045; }
+      from { text-shadow: 0 0 15px #fff, 0 0 25px #ff6ec4; }
+      to { text-shadow: 0 0 25px #fff, 0 0 45px #7873f5; }
     }
 
     #typewriter {
-      font-size: 28px;
-      color: #ffe9ec;
-      max-width: 700px;
+      font-size: 26px;
+      color: #fff;
+      max-width: 800px;
       margin: 20px auto;
-      height: 120px;
+      height: 100px;
       overflow: hidden;
-      border-right: 3px solid #ffe9ec;
+      border-right: 4px solid #fff;
       white-space: nowrap;
       letter-spacing: 2px;
-      animation: typing 5s steps(50, end), blink-caret 0.75s step-end infinite;
+      animation: typing 5s steps(60, end), blink-caret 0.75s step-end infinite;
     }
 
     @keyframes typing {
@@ -74,59 +66,51 @@
     .btn {
       margin-top: 30px;
       padding: 15px 40px;
-      background: linear-gradient(to right, #ff758c, #ffa07a);
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
       color: white;
-      font-size: 24px;
+      font-size: 22px;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       transition: 0.4s;
-      box-shadow: 0 0 20px rgba(255, 117, 140, 0.8);
+      box-shadow: 0 0 20px rgba(255, 117, 140, 0.7);
     }
 
     .btn:hover {
       transform: scale(1.1);
-      background: linear-gradient(to right, #ffa07a, #ff758c);
+      background: linear-gradient(to right, #ff7eb3, #ff758c);
+    }
+
+    #countdown {
+      margin-top: 30px;
+      font-size: 26px;
+    }
+
+    #timer {
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 10px;
     }
 
     .hidden {
       display: none;
+      font-size: 24px;
       margin-top: 30px;
-      font-size: 24px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
       animation: fadeIn 2s ease;
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 15px;
-    }
-
-    #countdown {
-      margin-top: 20px;
-      font-size: 24px;
-      text-align: center;
-    }
-
-    #timer {
-      font-weight: bold;
-      font-size: 28px;
-      margin-top: 10px;
     }
 
     @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    /* Fireworks canvas */
-    canvas {
+    canvas#fireworks {
       position: fixed;
       top: 0;
       left: 0;
-      pointer-events: none;
       width: 100%;
       height: 100%;
+      pointer-events: none;
       z-index: 0;
     }
   </style>
@@ -134,15 +118,15 @@
 
 <body>
 
-<div class="overlay"></div>
 <canvas id="fireworks"></canvas>
 
 <div class="container">
-  <h1 id="birthday-heading">Happy Birthday My Queen! 👑</h1>
-  <div id="typewriter">You are the sparkle in my life, the melody in my heart, and the love of my soul... 💖</div>
+  <h1>Happy Birthday, Rimsha! 🎂</h1>
+
+  <div id="typewriter">Your smile lights up my world more than the sun ever could... ✨</div>
 
   <div id="countdown">
-    <h2>Countdown to the Magic Moment:</h2>
+    <h2>Countdown to your magical day:</h2>
     <div id="timer">
       <span id="days">00</span> Days
       <span id="hours">00</span> Hours
@@ -151,34 +135,44 @@
     </div>
   </div>
 
-  <button class="btn" onclick="showMessage()">✨ Click for Your Special Wish ✨</button>
+  <button class="btn" onclick="showMessage()">💝 See My Special Wish</button>
 
   <div id="specialMessage" class="hidden">
-    "To my beautiful Rimsha,  
-    You are not just my wife, you are my dream come true, my forever sunshine, my sweetest song.  
-    On your birthday, I wish you oceans of joy, mountains of laughter, and a sky full of dreams.  
-    May your smile light up the world as it lights up my heart every single day.  
-    Love you infinitely and beyond! 💖💫"
+    Dearest Rimsha,  
+    You are the rhythm to my heartbeat, the light in my life, and the reason behind my endless smiles.  
+    May every moment ahead sparkle with joy just like YOU! ✨  
+    Happy Birthday, my forever queen! 👑❤️
   </div>
 </div>
 
-<audio id="birthdaySong" loop>
+<audio id="birthdaySong" autoplay loop>
   <source src="your-music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+  const nextBirthday = new Date('2025-05-15T00:00:00');
+  const fireworks = new Fireworks.default(document.getElementById('fireworks'), { 
+    rocketsPoint: 50, 
+    hue: { min: 0, max: 360 },
+    delay: { min: 30, max: 60 },
+    speed: 2,
+    acceleration: 1.05,
+    friction: 0.98,
+    gravity: 1.5,
+    particles: 200,
+    trace: 3,
+    explosion: 5
+  });
+
   function showMessage() {
     document.getElementById('specialMessage').style.display = 'block';
     Swal.fire({
-      title: '💖 To My Queen 💖',
-      html: 'Happy Birthday, Rimsha! <br> My life shines brighter because of you! 🌟',
+      title: '💖 A Special Message 💖',
+      html: 'My love, my life, my Rimsha! <br> Happy Birthday, darling! 🎂💐',
       icon: 'success',
-      confirmButtonText: 'Love You ❤️'
+      confirmButtonText: 'Love You Forever ❤️'
     });
   }
-
-  // Countdown Timer
-  const nextBirthday = new Date('2025-04-27T00:00:00');
 
   function updateCountdown() {
     const now = new Date();
@@ -186,11 +180,11 @@
 
     if (diff <= 0) {
       document.getElementById('countdown').innerHTML = `
-        <h1 style="font-size: 60px; background: linear-gradient(to right, #ff758c, #ffa07a); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎂 Happy Birthday, My Angel! 🎂</h1>
-        <p style="color:white; font-size:24px;">Today, the world shines just for you! ✨</p>
+        <h1 style="font-size: 60px; background: linear-gradient(to right, #ff758c, #ffa07a); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎂 Happy Birthday, Rimsha! 🎂</h1>
+        <p style="color:white; font-size:24px;">Today, the universe celebrates you! 🌟</p>
       `;
       document.getElementById('birthdaySong').play();
-      launchFireworks();
+      fireworks.start();
       return;
     }
 
@@ -207,62 +201,6 @@
 
   setInterval(updateCountdown, 1000);
   updateCountdown();
-
-  // Fireworks
-  const canvas = document.getElementById('fireworks');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let particles = [];
-
-  function createFirework() {
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height / 2;
-    const count = 100;
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: x,
-        y: y,
-        speed: Math.random() * 5,
-        radius: Math.random() * 2 + 1,
-        angle: Math.random() * 2 * Math.PI,
-        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-        alpha: 1
-      });
-    }
-  }
-
-  function updateFireworks() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p, index) => {
-      p.x += Math.cos(p.angle) * p.speed;
-      p.y += Math.sin(p.angle) * p.speed;
-      p.alpha -= 0.01;
-      if (p.alpha <= 0) particles.splice(index, 1);
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${hexToRgb(p.color)},${p.alpha})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(updateFireworks);
-  }
-
-  function hexToRgb(hsl) {
-    return hsl.match(/\d+/g).join(',');
-  }
-
-  function launchFireworks() {
-    setInterval(createFirework, 500);
-  }
-
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-
-  updateFireworks();
 </script>
 
 </body>
