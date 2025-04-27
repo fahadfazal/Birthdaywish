@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday Rimsha!</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap" rel="stylesheet">
+  
+  <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    /* Basic Setup */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      font-family: 'Open Sans', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+      animation: gradientBG 15s ease infinite;
+      background-size: 400% 400%;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* Container */
+    .container {
+      text-align: center;
+      padding: 100px 20px 50px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Title */
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 72px;
+      background: linear-gradient(45deg, #ff6ec4, #7873f5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+      margin-bottom: 20px;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff6ec4; }
+      to { text-shadow: 0 0 20px #fff, 0 0 40px #7873f5; }
+    }
+
+    /* Typewriter */
+    #typewriter {
+      font-size: 24px;
+      color: white;
+      max-width: 700px;
+      margin: 20px auto;
+      height: 120px;
+      overflow: hidden;
+      border-right: 3px solid #fff;
+      white-space: nowrap;
+      letter-spacing: 2px;
+      animation: typing 5s steps(50, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      50% { border-color: transparent; }
+    }
+
+    /* Buttons */
+    .btn, .music-btn {
+      margin-top: 30px;
+      padding: 15px 40px;
+      font-size: 22px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 0 20px rgba(255, 117, 140, 0.7);
+    }
+
+    .btn {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(to right, #ff7eb3, #ff758c);
+    }
+
+    .music-btn {
+      display: inline-block;
+      background: #fff;
+      color: #ff6ec4;
+      font-size: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .music-btn::after {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255,110,196,0.4) 20%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: 0.5s;
+      border-radius: 50%;
+    }
+
+    .music-btn:hover::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Special Message */
+    .hidden {
+      display: none;
+      margin-top: 30px;
+      color: #fff;
+      font-size: 22px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeIn 2s ease;
+    }
+
+    /* Countdown */
+    #countdown {
+      margin-top: 20px;
+      color: white;
+      font-size: 24px;
+    }
+
+    #timer {
+      font-weight: bold;
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    /* Floating Hearts */
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatUp 8s infinite ease-in;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Fireworks */
+    #fireworksCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Hearts -->
+<div class="hearts"></div>
+
+<!-- Fireworks -->
+<canvas id="fireworksCanvas"></canvas>
+
+<!-- Main Content -->
+<div class="container">
+  <h1>Happy Birthday, Rimsha! 🎉</h1>
+  <div id="typewriter">Every moment with you shines brighter than the stars... 🌟</div>
+
+  <div id="countdown">
+    <h2>Countdown to Your Next Birthday:</h2>
+    <div id="timer">
+      <span id="days">00</span> Days
+      <span id="hours">00</span> Hours
+      <span id="minutes">00</span> Minutes
+      <span id="seconds">00</span> Seconds
+    </div>
+  </div>
+
+  <button class="btn" onclick="showMessage()">Click to See Your Surprise 💖</button>
+  <br>
+  <button class="music-btn" onclick="toggleMusic()">🎶 Play/Pause Music</button>
+
+  <div id="specialMessage" class="hidden">
+    "Dear Rimsha, you are the poetry my heart sings.  
+    Forever blessed to walk this beautiful life with you.  
+    Here's to a lifetime of celebrations, my love! ❤️"
+  </div>
+</div>
+
+<!-- Background Music -->
+<audio id="birthdaySong" autoplay loop>
+  <source src="your-music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- JavaScript -->
+<script>
+  function showMessage() {
+    const message = document.getElementById('specialMessage');
+    message.classList.remove('hidden');
+    Swal.fire({
+      title: '💖 Special Message 💖',
+      text: "Dear Rimsha, you are the poetry my heart sings. Forever blessed to walk this beautiful life with you. Here's to a lifetime of celebrations, my love!",
+      icon: 'success',
+      confirmButtonText: 'Aww, Thank You! 💕',
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url("https://media.giphy.com/media/3ohhwF34cGDoFFhRfy/giphy.gif")
+        center center
+        no-repeat
+      `
+    });
+    // Extra fireworks when she sees the message
+    for (let i = 0; i < 5; i++) {
+      setTimeout(createFirework, i * 400);
+    }
+  }
+
+  let isPlaying = true;
+  function toggleMusic() {
+    const music = document.getElementById('birthdaySong');
+    if (isPlaying) {
+      music.pause();
+    } else {
+      music.play();
+    }
+    isPlaying = !isPlaying;
+  }
+
+  // Hearts floating
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
+    document.querySelector('.hearts').appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }
+  setInterval(createHeart, 500);
+
+  // Countdown
+  const nextBirthday = new Date('2025-04-27T00:00:00');
+  function updateCountdown() {
+    const now = new Date();
+    const diff = nextBirthday - now;
+
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = "<h2>Happy Birthday, Rimsha! 🎉🎂</h2>";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Fireworks
+  const canvas = document.getElementById('fireworksCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function createParticle(x, y, color) {
+    const angle = Math.random() * 2 * Math.PI;
+    const speed = Math.random() * 5 + 2;
+    return {
+      x: x,
+      y: y,
+      speedX: Math.cos(angle) * speed,
+      speedY: Math.sin(angle) * speed,
+      gravity: 0.05,
+      size: Math.random() * 3 + 2,
+      color: color,
+      life: 100
+    };
+  }
+
+  function createFirework() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height / 2;
+    const colors = ['#ff4b1f', '#ff9068', '#ff6ec4', '#7873f5', '#42e695', '#88f7e0'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    for (let i = 0; i < 30; i++) {
+      particles.push(createParticle(x, y, color));
+    }
+  }
+
+  function updateParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.speedX;
+      p.y += p.speedY;
+      p.speedY += p.gravity;
+      p.life--;
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+        i--;
+      }
+    }
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+    });
+  }
+
+  function animate() {
+    updateParticles();
+    drawParticles();
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  setInterval(createFirework, 800);
+</script>
+
+</body>
+</html>
