@@ -4,22 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Happy Birthday Rimsha!</title>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap" rel="stylesheet">
-  
-  <!-- Sweet Alert -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Sweet Alert -->
   <style>
-    /* Basic Setup */
     body {
       margin: 0;
       padding: 0;
       background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
       font-family: 'Open Sans', sans-serif;
       overflow-x: hidden;
-      position: relative;
       animation: gradientBG 15s ease infinite;
       background-size: 400% 400%;
     }
@@ -30,7 +23,6 @@
       100% {background-position: 0% 50%;}
     }
 
-    /* Container */
     .container {
       text-align: center;
       padding: 100px 20px 50px 20px;
@@ -38,7 +30,6 @@
       z-index: 2;
     }
 
-    /* Title */
     h1 {
       font-family: 'Dancing Script', cursive;
       font-size: 72px;
@@ -54,7 +45,6 @@
       to { text-shadow: 0 0 20px #fff, 0 0 40px #7873f5; }
     }
 
-    /* Typewriter */
     #typewriter {
       font-size: 24px;
       color: white;
@@ -77,10 +67,11 @@
       50% { border-color: transparent; }
     }
 
-    /* Buttons */
-    .btn, .music-btn {
+    .btn {
       margin-top: 30px;
       padding: 15px 40px;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
       font-size: 22px;
       border: none;
       border-radius: 50px;
@@ -89,43 +80,11 @@
       box-shadow: 0 0 20px rgba(255, 117, 140, 0.7);
     }
 
-    .btn {
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
-      color: white;
-    }
-
     .btn:hover {
       transform: scale(1.1);
       background: linear-gradient(to right, #ff7eb3, #ff758c);
     }
 
-    .music-btn {
-      display: inline-block;
-      background: #fff;
-      color: #ff6ec4;
-      font-size: 18px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .music-btn::after {
-      content: '';
-      position: absolute;
-      width: 150%;
-      height: 150%;
-      background: radial-gradient(circle, rgba(255,110,196,0.4) 20%, transparent 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      transition: 0.5s;
-      border-radius: 50%;
-    }
-
-    .music-btn:hover::after {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    /* Special Message */
     .hidden {
       display: none;
       margin-top: 30px;
@@ -137,11 +96,11 @@
       animation: fadeIn 2s ease;
     }
 
-    /* Countdown */
     #countdown {
       margin-top: 20px;
       color: white;
       font-size: 24px;
+      text-align: center;
     }
 
     #timer {
@@ -150,58 +109,19 @@
       margin-top: 10px;
     }
 
-    /* Floating Hearts */
-    .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      transform: rotate(45deg);
-      animation: floatUp 8s infinite ease-in;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
-    }
-
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { left: -10px; top: 0; }
-
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
-    }
-
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
     }
 
-    /* Fireworks */
-    #fireworksCanvas {
+    /* Fireworks canvas */
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
+      pointer-events: none;
       width: 100%;
       height: 100%;
-      pointer-events: none;
       z-index: 1;
     }
   </style>
@@ -209,19 +129,14 @@
 
 <body>
 
-<!-- Hearts -->
-<div class="hearts"></div>
+<canvas id="fireworks"></canvas>
 
-<!-- Fireworks -->
-<canvas id="fireworksCanvas"></canvas>
-
-<!-- Main Content -->
 <div class="container">
-  <h1>Happy Birthday, Rimsha! 🎉</h1>
+  <h1 id="birthday-heading">Happy Birthday, Rimsha! 🎉</h1>
   <div id="typewriter">Every moment with you shines brighter than the stars... 🌟</div>
 
   <div id="countdown">
-    <h2>Countdown to Your Next Birthday:</h2>
+    <h2>Countdown to Your Birthday:</h2>
     <div id="timer">
       <span id="days">00</span> Days
       <span id="hours">00</span> Hours
@@ -231,8 +146,6 @@
   </div>
 
   <button class="btn" onclick="showMessage()">Click to See Your Surprise 💖</button>
-  <br>
-  <button class="music-btn" onclick="toggleMusic()">🎶 Play/Pause Music</button>
 
   <div id="specialMessage" class="hidden">
     "Dear Rimsha, you are the poetry my heart sings.  
@@ -241,64 +154,35 @@
   </div>
 </div>
 
-<!-- Background Music -->
-<audio id="birthdaySong" autoplay loop>
+<audio id="birthdaySong" loop>
   <source src="your-music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- JavaScript -->
 <script>
   function showMessage() {
-    const message = document.getElementById('specialMessage');
-    message.classList.remove('hidden');
+    document.getElementById('specialMessage').style.display = 'block';
     Swal.fire({
-      title: '💖 Special Message 💖',
-      text: "Dear Rimsha, you are the poetry my heart sings. Forever blessed to walk this beautiful life with you. Here's to a lifetime of celebrations, my love!",
-      icon: 'success',
-      confirmButtonText: 'Aww, Thank You! 💕',
-      backdrop: `
-        rgba(0,0,123,0.4)
-        url("https://media.giphy.com/media/3ohhwF34cGDoFFhRfy/giphy.gif")
-        center center
-        no-repeat
-      `
+      title: '🎉 Surprise! 🎉',
+      text: 'I love you so much, Rimsha!',
+      icon: 'heart',
+      confirmButtonText: 'Aww 💖'
     });
-    // Extra fireworks when she sees the message
-    for (let i = 0; i < 5; i++) {
-      setTimeout(createFirework, i * 400);
-    }
   }
 
-  let isPlaying = true;
-  function toggleMusic() {
-    const music = document.getElementById('birthdaySong');
-    if (isPlaying) {
-      music.pause();
-    } else {
-      music.play();
-    }
-    isPlaying = !isPlaying;
-  }
-
-  // Hearts floating
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
-    document.querySelector('.hearts').appendChild(heart);
-    setTimeout(() => heart.remove(), 8000);
-  }
-  setInterval(createHeart, 500);
-
-  // Countdown
+  // Countdown Logic
   const nextBirthday = new Date('2025-04-27T00:00:00');
+
   function updateCountdown() {
     const now = new Date();
     const diff = nextBirthday - now;
 
     if (diff <= 0) {
-      document.getElementById('countdown').innerHTML = "<h2>Happy Birthday, Rimsha! 🎉🎂</h2>";
+      document.getElementById('countdown').innerHTML = `
+        <h1 style="font-size: 50px; background: linear-gradient(to right, #ff758c, #ff7eb3); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎉 Happy Birthday, Rimsha! 🎉</h1>
+        <p style="color:white; font-size:24px;">Wishing you endless joy and love! 💖</p>
+      `;
+      document.getElementById('birthdaySong').play();
+      launchFireworks();
       return;
     }
 
@@ -312,78 +196,65 @@
     document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
     document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
   }
+
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // Fireworks
-  const canvas = document.getElementById('fireworksCanvas');
+  // Fireworks Canvas Animation
+  const canvas = document.getElementById('fireworks');
   const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
   let particles = [];
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  function createParticle(x, y, color) {
-    const angle = Math.random() * 2 * Math.PI;
-    const speed = Math.random() * 5 + 2;
-    return {
-      x: x,
-      y: y,
-      speedX: Math.cos(angle) * speed,
-      speedY: Math.sin(angle) * speed,
-      gravity: 0.05,
-      size: Math.random() * 3 + 2,
-      color: color,
-      life: 100
-    };
-  }
 
   function createFirework() {
     const x = Math.random() * canvas.width;
     const y = Math.random() * canvas.height / 2;
-    const colors = ['#ff4b1f', '#ff9068', '#ff6ec4', '#7873f5', '#42e695', '#88f7e0'];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    for (let i = 0; i < 30; i++) {
-      particles.push(createParticle(x, y, color));
+    const count = 100;
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: x,
+        y: y,
+        speed: Math.random() * 5,
+        radius: Math.random() * 2 + 1,
+        angle: Math.random() * 2 * Math.PI,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        alpha: 1
+      });
     }
   }
 
-  function updateParticles() {
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.x += p.speedX;
-      p.y += p.speedY;
-      p.speedY += p.gravity;
-      p.life--;
-      if (p.life <= 0) {
-        particles.splice(i, 1);
-        i--;
-      }
-    }
-  }
-
-  function drawParticles() {
+  function updateFireworks() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
+    particles.forEach((p, index) => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed;
+      p.alpha -= 0.01;
+      if (p.alpha <= 0) particles.splice(index, 1);
+
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
-      ctx.fillStyle = p.color;
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${hexToRgb(p.color)},${p.alpha})`;
       ctx.fill();
     });
+    requestAnimationFrame(updateFireworks);
   }
 
-  function animate() {
-    updateParticles();
-    drawParticles();
-    requestAnimationFrame(animate);
+  function hexToRgb(hsl) {
+    return hsl.match(/\d+/g).join(',');
   }
-  animate();
 
-  setInterval(createFirework, 800);
+  function launchFireworks() {
+    setInterval(createFirework, 500);
+  }
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  updateFireworks();
 </script>
 
 </body>
