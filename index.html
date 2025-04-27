@@ -3,24 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Happy Birthday Rimsha!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Happy Birthday My Queen!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Sweet Alert -->
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      background: url('https://images.unsplash.com/photo-1605727216805-27d01d005baa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
       font-family: 'Open Sans', sans-serif;
       overflow-x: hidden;
-      animation: gradientBG 15s ease infinite;
-      background-size: 400% 400%;
+      position: relative;
+      color: #fff;
     }
 
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
     }
 
     .container {
@@ -31,9 +35,9 @@
     }
 
     h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 72px;
-      background: linear-gradient(45deg, #ff6ec4, #7873f5);
+      font-family: 'Great Vibes', cursive;
+      font-size: 80px;
+      background: linear-gradient(45deg, #ffd1dc, #fcb045);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: glow 2s infinite alternate;
@@ -41,18 +45,18 @@
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff6ec4; }
-      to { text-shadow: 0 0 20px #fff, 0 0 40px #7873f5; }
+      from { text-shadow: 0 0 10px #ffd1dc; }
+      to { text-shadow: 0 0 30px #fcb045; }
     }
 
     #typewriter {
-      font-size: 24px;
-      color: white;
+      font-size: 28px;
+      color: #ffe9ec;
       max-width: 700px;
       margin: 20px auto;
       height: 120px;
       overflow: hidden;
-      border-right: 3px solid #fff;
+      border-right: 3px solid #ffe9ec;
       white-space: nowrap;
       letter-spacing: 2px;
       animation: typing 5s steps(50, end), blink-caret 0.75s step-end infinite;
@@ -70,35 +74,36 @@
     .btn {
       margin-top: 30px;
       padding: 15px 40px;
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      background: linear-gradient(to right, #ff758c, #ffa07a);
       color: white;
-      font-size: 22px;
+      font-size: 24px;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       transition: 0.4s;
-      box-shadow: 0 0 20px rgba(255, 117, 140, 0.7);
+      box-shadow: 0 0 20px rgba(255, 117, 140, 0.8);
     }
 
     .btn:hover {
       transform: scale(1.1);
-      background: linear-gradient(to right, #ff7eb3, #ff758c);
+      background: linear-gradient(to right, #ffa07a, #ff758c);
     }
 
     .hidden {
       display: none;
       margin-top: 30px;
-      color: #fff;
-      font-size: 22px;
-      max-width: 600px;
+      font-size: 24px;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
       animation: fadeIn 2s ease;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 15px;
     }
 
     #countdown {
       margin-top: 20px;
-      color: white;
       font-size: 24px;
       text-align: center;
     }
@@ -122,21 +127,22 @@
       pointer-events: none;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 0;
     }
   </style>
 </head>
 
 <body>
 
+<div class="overlay"></div>
 <canvas id="fireworks"></canvas>
 
 <div class="container">
-  <h1 id="birthday-heading">Happy Birthday, Rimsha! 🎉</h1>
-  <div id="typewriter">Every moment with you shines brighter than the stars... 🌟</div>
+  <h1 id="birthday-heading">Happy Birthday My Queen! 👑</h1>
+  <div id="typewriter">You are the sparkle in my life, the melody in my heart, and the love of my soul... 💖</div>
 
   <div id="countdown">
-    <h2>Countdown to Your Birthday:</h2>
+    <h2>Countdown to the Magic Moment:</h2>
     <div id="timer">
       <span id="days">00</span> Days
       <span id="hours">00</span> Hours
@@ -145,12 +151,14 @@
     </div>
   </div>
 
-  <button class="btn" onclick="showMessage()">Click to See Your Surprise 💖</button>
+  <button class="btn" onclick="showMessage()">✨ Click for Your Special Wish ✨</button>
 
   <div id="specialMessage" class="hidden">
-    "Dear Rimsha, you are the poetry my heart sings.  
-    Forever blessed to walk this beautiful life with you.  
-    Here's to a lifetime of celebrations, my love! ❤️"
+    "To my beautiful Rimsha,  
+    You are not just my wife, you are my dream come true, my forever sunshine, my sweetest song.  
+    On your birthday, I wish you oceans of joy, mountains of laughter, and a sky full of dreams.  
+    May your smile light up the world as it lights up my heart every single day.  
+    Love you infinitely and beyond! 💖💫"
   </div>
 </div>
 
@@ -162,14 +170,14 @@
   function showMessage() {
     document.getElementById('specialMessage').style.display = 'block';
     Swal.fire({
-      title: '🎉 Surprise! 🎉',
-      text: 'I love you so much, Rimsha!',
-      icon: 'heart',
-      confirmButtonText: 'Aww 💖'
+      title: '💖 To My Queen 💖',
+      html: 'Happy Birthday, Rimsha! <br> My life shines brighter because of you! 🌟',
+      icon: 'success',
+      confirmButtonText: 'Love You ❤️'
     });
   }
 
-  // Countdown Logic
+  // Countdown Timer
   const nextBirthday = new Date('2025-04-27T00:00:00');
 
   function updateCountdown() {
@@ -178,8 +186,8 @@
 
     if (diff <= 0) {
       document.getElementById('countdown').innerHTML = `
-        <h1 style="font-size: 50px; background: linear-gradient(to right, #ff758c, #ff7eb3); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎉 Happy Birthday, Rimsha! 🎉</h1>
-        <p style="color:white; font-size:24px;">Wishing you endless joy and love! 💖</p>
+        <h1 style="font-size: 60px; background: linear-gradient(to right, #ff758c, #ffa07a); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎂 Happy Birthday, My Angel! 🎂</h1>
+        <p style="color:white; font-size:24px;">Today, the world shines just for you! ✨</p>
       `;
       document.getElementById('birthdaySong').play();
       launchFireworks();
@@ -200,7 +208,7 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // Fireworks Canvas Animation
+  // Fireworks
   const canvas = document.getElementById('fireworks');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
