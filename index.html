@@ -15,7 +15,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
       color: #fff;
       overflow-x: hidden;
       text-align: center;
@@ -36,12 +36,6 @@
       to { text-shadow: 0 0 25px #fff, 0 0 30px #7873f5; }
     }
 
-    #timer span {
-      font-size: 50px;
-      font-weight: bold;
-      margin: 0 10px;
-    }
-
     #specialMessage, .letter, .wishes {
       display: none;
       animation: fadeIn 2s forwards;
@@ -58,17 +52,6 @@
       margin: 10px;
       padding: 10px;
       border-radius: 10px;
-    }
-
-    #cake {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      width: 300px;
-      animation: fadeIn 1s ease-in-out;
     }
 
     .float {
@@ -99,15 +82,7 @@
 
 <canvas id="fireworks"></canvas>
 
-<h1 id="headline">Countdown to Your Special Day! 🎉</h1>
-<div id="countdown">
-  <div id="timer">
-    <span id="days">00</span> Days
-    <span id="hours">00</span> Hours
-    <span id="minutes">00</span> Minutes
-    <span id="seconds">00</span> Seconds
-  </div>
-</div>
+<h1 id="headline">🎉 Happy Birthday, Rimsha! 🎉</h1>
 
 <div id="specialMessage">
   <p>🎂 Happy Birthday to the Queen of My Heart, Rimsha! 🎂</p>
@@ -115,9 +90,6 @@
   <p>May your life be as beautiful as your soul. 💖</p>
   <p>Love you forever and beyond! 🚀🌟</p>
 </div>
-
-<!-- Cake Cutting -->
-<img id="cake" src="cake.gif" alt="Cake Cutting" />
 
 <!-- Love Letter -->
 <div class="letter" id="letter">
@@ -148,10 +120,8 @@
 </audio>
 
 <script>
-  const nextBirthday = new Date('2025-05-14T00:00:00');
   const fireworks = new Fireworks.default(document.getElementById('fireworks'), { particles: 250 });
   const audio = document.getElementById('birthdaySong');
-  let hasCelebrated = false;
 
   function floatHeartsAndRoses() {
     const emojis = ['💖', '🌹'];
@@ -164,58 +134,31 @@
       document.body.appendChild(span);
       setTimeout(() => span.remove(), 10000);
     }
+  }
 
   function showLoveLetter() {
     document.getElementById('letter').style.display = 'block';
   }
 
-  function updateCountdown() {
-    const now = new Date();
-    const diff = nextBirthday - now;
+  document.getElementById('specialMessage').style.display = "block";
+  document.getElementById('wishes').style.display = "block";
 
-    if (diff <= 0 && !hasCelebrated) {
-      hasCelebrated = true;
+  fireworks.start();
+  audio.play().catch(() => {
+    Swal.fire({
+      title: '🎂 Happy Birthday, My Dearest Rimsha!',
+      html: 'Tap OK to hear your song! 🎵',
+      icon: 'success',
+      confirmButtonText: 'Play Music'
+    }).then(() => audio.play());
+  });
 
-      document.getElementById('headline').innerHTML = "🎉 Happy Birthday, Rimsha! 🎉";
-      document.getElementById('countdown').style.display = "none";
-      document.getElementById('specialMessage').style.display = "block";
-      document.getElementById('wishes').style.display = "block";
+  setTimeout(() => {
+    floatHeartsAndRoses();
+    setInterval(floatHeartsAndRoses, 8000);
+  }, 30000);
 
-      fireworks.start();
-
-      // Play music
-      audio.play().catch(() => {
-        Swal.fire({
-          title: '🎂 Happy Birthday, My Dearest Rimsha!',
-          html: 'Tap OK to hear your song! 🎵',
-          icon: 'success',
-          confirmButtonText: 'Play Music'
-        }).then(() => audio.play());
-      });
-
-      setTimeout(() => {
-        floatHeartsAndRoses();
-        setInterval(floatHeartsAndRoses, 8000);
-      }, 30000); // Hearts at 20s
-
-      setTimeout(showLoveLetter, 50000); // Letter at 30s
-
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-  }
-
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
+  setTimeout(showLoveLetter, 50000);
 
   document.addEventListener('click', () => audio.play().catch(() => {}), { once: true });
 </script>
