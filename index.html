@@ -180,12 +180,8 @@
 </audio>
 
 <script>
-  // Set target date to May 14
-  const today = new Date();
-  let nextBirthday = new Date(today.getFullYear(), 4, 14);
-  if (today > nextBirthday) {
-    nextBirthday = new Date(today.getFullYear() + 1, 4, 14);
-  }
+  // 🎯 Fixed Birthday: May 14, 2025
+  const nextBirthday = new Date('2025-05-14T00:00:00');
 
   const fireworks = new Fireworks.default(document.getElementById('fireworks'), {
     rocketsPoint: 50,
@@ -244,7 +240,7 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // Carousel
+  // 🎠 Photo Carousel
   const images = [
     "images/photo1.jpg",
     "images/photo2.jpg",
