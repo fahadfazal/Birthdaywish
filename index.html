@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Happy Birthday Rimsha!</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.1.0/dist/index.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -78,7 +78,6 @@
     }
   </style>
 </head>
-
 <body>
 
 <canvas id="fireworks"></canvas>
@@ -103,13 +102,19 @@
 </div>
 
 <audio id="birthdaySong" loop>
-  <source src="your-music.mp3" type="audio/mpeg">
+  <source src="your-music.mp3" type="audio/mpeg" />
 </audio>
 
 <script>
-  const nextBirthday = new Date('2025-05-13T00:00:00');
-  const fireworks = new Fireworks.default(document.getElementById('fireworks'), { 
-    rocketsPoint: 50, 
+  // Get the next birthday (May 13). Adjust year if it's already passed.
+  const today = new Date();
+  let nextBirthday = new Date(today.getFullYear(), 4, 13); // Month 4 = May
+  if (today > nextBirthday) {
+    nextBirthday = new Date(today.getFullYear() + 1, 4, 13);
+  }
+
+  const fireworks = new Fireworks.default(document.getElementById('fireworks'), {
+    rocketsPoint: 50,
     hue: { min: 0, max: 360 },
     delay: { min: 30, max: 60 },
     speed: 2,
@@ -122,22 +127,29 @@
   });
 
   const audio = document.getElementById('birthdaySong');
+  let hasCelebrated = false;
 
   function updateCountdown() {
     const now = new Date();
     const diff = nextBirthday - now;
 
-    if (diff <= 0) {
+    if (diff <= 0 && !hasCelebrated) {
+      hasCelebrated = true;
       document.getElementById('headline').innerHTML = "🎉 Happy Birthday, Rimsha! 🎉";
       document.getElementById('countdown').style.display = "none";
       document.getElementById('specialMessage').style.display = "block";
       fireworks.start();
-      audio.play();
+
+      // Require user interaction to play audio (browsers limit autoplay)
       Swal.fire({
         title: '🎂 Happy Birthday, My Dearest Rimsha! 🎂',
         html: 'Wishing you oceans of happiness and endless love! 💖✨<br>Today is YOUR day!',
         icon: 'success',
-        confirmButtonText: 'Thank you for being YOU 💝'
+        confirmButtonText: 'Play Music 💝'
+      }).then(() => {
+        audio.play().catch(err => {
+          console.warn("Autoplay blocked. User interaction needed.", err);
+        });
       });
       return;
     }
@@ -147,14 +159,14 @@
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
 
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
   }
 
-  setInterval(updateCountdown, 1000);
   updateCountdown();
+  setInterval(updateCountdown, 1000);
 </script>
 
 </body>
