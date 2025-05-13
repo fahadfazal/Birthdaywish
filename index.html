@@ -36,27 +36,28 @@
       to { text-shadow: 0 0 25px #fff, 0 0 30px #7873f5; }
     }
 
-    #countdown, #timer {
-      margin-top: 20px;
-      font-size: 32px;
-    }
-
     #timer span {
       font-size: 50px;
       font-weight: bold;
       margin: 0 10px;
     }
 
-    #specialMessage {
-      font-size: 26px;
-      margin-top: 40px;
+    #specialMessage, .carousel, .letter, .wishes {
       display: none;
       animation: fadeIn 2s forwards;
+      margin: 40px auto;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
+    }
+
+    .wishes .wish {
+      background: rgba(255,255,255,0.1);
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
     }
 
     canvas#fireworks {
@@ -69,56 +70,39 @@
       z-index: 0;
     }
 
-    .carousel {
+    #cake {
       display: none;
-      margin: 50px auto;
-      width: 80%;
-      max-width: 600px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      width: 300px;
+      animation: fadeIn 1s ease-in-out;
     }
 
-    .carousel img {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      transition: transform 0.5s ease;
+    /* Floating hearts and roses */
+    .float {
+      position: fixed;
+      width: 30px;
+      animation: float 10s infinite;
+      z-index: 1;
     }
 
-    .letter {
-      margin: 60px auto;
-      padding: 20px;
-      max-width: 800px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      display: none;
-      animation: fadeIn 2s forwards;
-    }
-
-    .letter p {
-      font-size: 20px;
-      line-height: 1.8;
-      white-space: pre-line;
-    }
-
-    .wishes {
-      margin: 60px auto;
-      max-width: 800px;
-      background: rgba(0, 0, 0, 0.2);
-      padding: 20px;
-      border-radius: 20px;
-      display: none;
-    }
-
-    .wishes h2 {
-      font-size: 30px;
-      margin-bottom: 20px;
-    }
-
-    .wish {
-      background: rgba(255,255,255,0.1);
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 18px;
+    @keyframes float {
+      0% {
+        bottom: 0;
+        opacity: 0;
+        transform: translateX(0) scale(0.5);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        bottom: 100%;
+        opacity: 0;
+        transform: translateX(100px) scale(1);
+      }
     }
   </style>
 </head>
@@ -143,9 +127,12 @@
   <p>Love you forever and beyond! 🚀🌟</p>
 </div>
 
+<!-- Cake Cutting -->
+<img id="cake" src="cake.gif" alt="Cake Cutting" />
+
 <!-- Romantic Photo Carousel -->
 <div class="carousel" id="carousel">
-  <img id="carouselImage" src="images/photo1.jpg" alt="Rimsha" />
+  <img id="carouselImage" src="images/photo1.jpg" alt="Rimsha" style="width: 80%; border-radius: 20px;" />
 </div>
 
 <!-- Love Letter -->
@@ -169,35 +156,48 @@
 <!-- Birthday Wishes -->
 <div class="wishes" id="wishes">
   <h2>🎈 Birthday Wishes from Friends</h2>
-  <div class="wish">"Happy Birthday Rimsha! May all your dreams come true!" – Subhana</div>
-  <div class="wish">"Wishing you endless love and laughter today and always!" – Aneeqa</div>
-  <div class="wish">"To the most amazing soul – have a magical birthday!" – Anum</div>
+  <div class="wish">"Happy Birthday Rimsha! May all your dreams come true!" – Sarah</div>
+  <div class="wish">"Wishing you endless love and laughter today and always!" – Ahsan</div>
+  <div class="wish">"To the most amazing soul – have a magical birthday!" – Maria</div>
+  <div class="wish">"You deserve all the happiness in the world. Happy Birthday!" – Momina</div>
+  <div class="wish">"Keep smiling and stay blessed! 🎉" – Taha</div>
+  <div class="wish">"You're a gem, Rimsha! Have a dazzling birthday!" – Hira</div>
 </div>
 
-<!-- Audio -->
-<audio id="birthdaySong" loop>
+<!-- Birthday Music -->
+<audio id="birthdaySong" autoplay loop>
   <source src="your-music.mp3" type="audio/mpeg" />
 </audio>
 
 <script>
-  // 🎯 Fixed Birthday: May 14, 2025
   const nextBirthday = new Date('2025-05-14T00:00:00');
-
-  const fireworks = new Fireworks.default(document.getElementById('fireworks'), {
-    rocketsPoint: 50,
-    hue: { min: 0, max: 360 },
-    delay: { min: 30, max: 60 },
-    speed: 2,
-    acceleration: 1.05,
-    friction: 0.97,
-    gravity: 1.5,
-    particles: 250,
-    trace: 3,
-    explosion: 6
-  });
+  const fireworks = new Fireworks.default(document.getElementById('fireworks'), { particles: 250 });
 
   const audio = document.getElementById('birthdaySong');
   let hasCelebrated = false;
+
+  function floatHeartsAndRoses() {
+    const emojis = ['💖', '🌹'];
+    for (let i = 0; i < 30; i++) {
+      const span = document.createElement('span');
+      span.className = 'float';
+      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.fontSize = Math.random() * 20 + 20 + 'px';
+      document.body.appendChild(span);
+      setTimeout(() => span.remove(), 10000);
+    }
+  }
+
+  function showCakeAndThenFloat() {
+    const cake = document.getElementById('cake');
+    cake.style.display = 'block';
+    setTimeout(() => {
+      cake.style.display = 'none';
+      floatHeartsAndRoses();
+      setInterval(floatHeartsAndRoses, 8000);
+    }, 20000); // Hide cake after 20s
+  }
 
   function updateCountdown() {
     const now = new Date();
@@ -205,24 +205,29 @@
 
     if (diff <= 0 && !hasCelebrated) {
       hasCelebrated = true;
+
       document.getElementById('headline').innerHTML = "🎉 Happy Birthday, Rimsha! 🎉";
       document.getElementById('countdown').style.display = "none";
       document.getElementById('specialMessage').style.display = "block";
       document.getElementById('carousel').style.display = "block";
       document.getElementById('letter').style.display = "block";
       document.getElementById('wishes').style.display = "block";
+
       fireworks.start();
 
-      Swal.fire({
-        title: '🎂 Happy Birthday, My Dearest Rimsha! 🎂',
-        html: 'Wishing you oceans of happiness and endless love! 💖✨<br>Today is YOUR day!',
-        icon: 'success',
-        confirmButtonText: 'Play Music 💝'
-      }).then(() => {
-        audio.play().catch(err => {
-          console.warn("Autoplay blocked. User interaction needed.", err);
-        });
+      // Try autoplay
+      audio.play().catch(() => {
+        Swal.fire({
+          title: '🎂 Happy Birthday, My Dearest Rimsha!',
+          html: 'Tap OK to hear your song! 🎵',
+          icon: 'success',
+          confirmButtonText: 'Play Music'
+        }).then(() => audio.play());
       });
+
+      // Cake after 30s
+      setTimeout(showCakeAndThenFloat, 30000);
+
       return;
     }
 
@@ -240,12 +245,11 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // 🎠 Photo Carousel
-  const images = [
-    "images/photo1.jpg",
-    "images/photo2.jpg",
-    "images/photo3.jpg"
-  ];
+  // First click fallback
+  document.addEventListener('click', () => audio.play().catch(() => {}), { once: true });
+
+  // Carousel
+  const images = ["images/photo1.jpg", "images/photo2.jpg", "images/photo3.jpg"];
   let current = 0;
   setInterval(() => {
     if (hasCelebrated) {
