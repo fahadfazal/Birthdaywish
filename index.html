@@ -239,15 +239,6 @@
   // First click fallback
   document.addEventListener('click', () => audio.play().catch(() => {}), { once: true });
 
-  // Carousel
-  const images = ["images/photo1.jpg", "images/photo2.jpg", "images/photo3.jpg"];
-  let current = 0;
-  setInterval(() => {
-    if (hasCelebrated) {
-      current = (current + 1) % images.length;
-      document.getElementById("carouselImage").src = images[current];
-    }
-  }, 3000);
 </script>
 
 </body>
