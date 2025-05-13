@@ -106,11 +106,11 @@
 </audio>
 
 <script>
-  // Get the next birthday (May 13). Adjust year if it's already passed.
+  // Get the next birthday (May 14). Adjust year if it's already passed.
   const today = new Date();
-  let nextBirthday = new Date(today.getFullYear(), 4, 13); // Month 4 = May
+  let nextBirthday = new Date(today.getFullYear(), 4, 14); // Month 4 = May
   if (today > nextBirthday) {
-    nextBirthday = new Date(today.getFullYear() + 1, 4, 13);
+    nextBirthday = new Date(today.getFullYear() + 1, 4, 14);
   }
 
   const fireworks = new Fireworks.default(document.getElementById('fireworks'), {
