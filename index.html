@@ -15,7 +15,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(135deg, #d9afd9 0%, #97d9e1 100%);
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
       color: #fff;
       overflow-x: hidden;
       text-align: center;
@@ -42,7 +42,7 @@
       margin: 0 10px;
     }
 
-    #specialMessage, .carousel, .letter, .wishes {
+    #specialMessage, .letter, .wishes {
       display: none;
       animation: fadeIn 2s forwards;
       margin: 40px auto;
@@ -60,7 +60,6 @@
       border-radius: 10px;
     }
 
-
     #cake {
       display: none;
       position: fixed;
@@ -72,7 +71,6 @@
       animation: fadeIn 1s ease-in-out;
     }
 
-    /* Floating hearts and roses */
     .float {
       position: fixed;
       width: 30px;
@@ -121,38 +119,27 @@
 <!-- Cake Cutting -->
 <img id="cake" src="cake.gif" alt="Cake Cutting" />
 
-<!-- Romantic Photo Carousel -->
-<div class="carousel" id="carousel">
-  <img id="carouselImage" src="images/photo1.jpg" alt="Rimsha" style="width: 80%; border-radius: 20px;" />
-</div>
-
 <!-- Love Letter -->
 <div class="letter" id="letter">
   <h2>💌 A Letter For You</h2>
   <p>
-    My Dearest Rimsha,
-
-    On this magical day, I just want you to know how grateful I am for your love.
-    Your smile lights up my darkest days, and your presence is my biggest blessing.
-
-    You are more than my love — you're my world, my heart, and my forever.
-
-    Happy Birthday, my love. I can’t wait to celebrate every one of your birthdays until we’re old and gray.
-
-    Yours always,
-    ❤️
+    My Dearest Rimsha,<br><br>
+    Since the moment you came into my life, everything changed. You brought light, love, and magic into my world.<br><br>
+    On your birthday, I just want to say thank you — for your love, your laughter, your heart. I am blessed every day because of you.<br><br>
+    Happy Birthday, my love. I'm forever grateful to call you mine.<br><br>
+    Yours always,<br>❤️
   </p>
 </div>
 
 <!-- Birthday Wishes -->
 <div class="wishes" id="wishes">
   <h2>🎈 Birthday Wishes </h2>
-  <div class="wish">"Happy Birthday Rimsha! May all your dreams come true!" – </div>
-  <div class="wish">"Wishing you endless love and laughter today and always!" – </div>
-  <div class="wish">"To the most amazing soul – have a magical birthday!" – </div>
-  <div class="wish">"You deserve all the happiness in the world. Happy Birthday!" – </div>
-  <div class="wish">"Keep smiling and stay blessed! 🎉" – </div>
-  <div class="wish">"You're a gem, Rimsha! Have a dazzling birthday!" – </div>
+  <div class="wish">"Happy Birthday Rimsha! May all your dreams come true!"</div>
+  <div class="wish">"Wishing you endless love and laughter today and always!"</div>
+  <div class="wish">"To the most amazing soul – have a magical birthday!"</div>
+  <div class="wish">"You deserve all the happiness in the world. Happy Birthday!"</div>
+  <div class="wish">"Keep smiling and stay blessed! 🎉"</div>
+  <div class="wish">"You're a gem, Rimsha! Have a dazzling birthday!"</div>
 </div>
 
 <!-- Birthday Music -->
@@ -163,7 +150,6 @@
 <script>
   const nextBirthday = new Date('2025-05-14T00:00:00');
   const fireworks = new Fireworks.default(document.getElementById('fireworks'), { particles: 250 });
-
   const audio = document.getElementById('birthdaySong');
   let hasCelebrated = false;
 
@@ -180,14 +166,12 @@
     }
   }
 
-  function showCakeAndThenFloat() {
-    const cake = document.getElementById('cake');
-    cake.style.display = 'block';
-    setTimeout(() => {
-      cake.style.display = 'none';
-      floatHeartsAndRoses();
-      setInterval(floatHeartsAndRoses, 8000);
-    }, 20000); // Hide cake after 20s
+  function showCake() {
+    document.getElementById('cake').style.display = 'block';
+  }
+
+  function showLoveLetter() {
+    document.getElementById('letter').style.display = 'block';
   }
 
   function updateCountdown() {
@@ -200,13 +184,11 @@
       document.getElementById('headline').innerHTML = "🎉 Happy Birthday, Rimsha! 🎉";
       document.getElementById('countdown').style.display = "none";
       document.getElementById('specialMessage').style.display = "block";
-      document.getElementById('carousel').style.display = "block";
-      document.getElementById('letter').style.display = "block";
       document.getElementById('wishes').style.display = "block";
 
       fireworks.start();
 
-      // Try autoplay
+      // Play music
       audio.play().catch(() => {
         Swal.fire({
           title: '🎂 Happy Birthday, My Dearest Rimsha!',
@@ -216,8 +198,13 @@
         }).then(() => audio.play());
       });
 
-      // Cake after 30s
-      setTimeout(showCakeAndThenFloat, 30000);
+      setTimeout(() => {
+        floatHeartsAndRoses();
+        setInterval(floatHeartsAndRoses, 8000);
+      }, 30000); // Hearts at 30s
+
+      setTimeout(showCake, 40000); // Cake at 40s
+      setTimeout(showLoveLetter, 50000); // Letter at 50s
 
       return;
     }
@@ -236,9 +223,7 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // First click fallback
   document.addEventListener('click', () => audio.play().catch(() => {}), { once: true });
-
 </script>
 
 </body>
