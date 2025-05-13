@@ -164,11 +164,6 @@
       document.body.appendChild(span);
       setTimeout(() => span.remove(), 10000);
     }
-  }
-
-  function showCake() {
-    document.getElementById('cake').style.display = 'block';
-  }
 
   function showLoveLetter() {
     document.getElementById('letter').style.display = 'block';
@@ -201,10 +196,9 @@
       setTimeout(() => {
         floatHeartsAndRoses();
         setInterval(floatHeartsAndRoses, 8000);
-      }, 30000); // Hearts at 30s
+      }, 30000); // Hearts at 20s
 
-      setTimeout(showCake, 40000); // Cake at 40s
-      setTimeout(showLoveLetter, 50000); // Letter at 50s
+      setTimeout(showLoveLetter, 50000); // Letter at 30s
 
       return;
     }
