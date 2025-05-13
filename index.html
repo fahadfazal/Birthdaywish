@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Happy Birthday Rimsha!</title>
 
+  <!-- Fonts & Libraries -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.1.0/dist/index.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -15,22 +16,15 @@
       padding: 0;
       font-family: 'Open Sans', sans-serif;
       background: linear-gradient(135deg, #d9afd9 0%, #97d9e1 100%);
-      background-size: cover;
       color: #fff;
-      overflow: hidden;
+      overflow-x: hidden;
       text-align: center;
-    }
-
-    .container {
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 20px;
     }
 
     h1 {
       font-family: 'Dancing Script', cursive;
       font-size: 70px;
+      margin-top: 40px;
       background: linear-gradient(90deg, #ff6ec4, #7873f5);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -42,21 +36,19 @@
       to { text-shadow: 0 0 25px #fff, 0 0 30px #7873f5; }
     }
 
-    #countdown {
-      font-size: 32px;
+    #countdown, #timer {
       margin-top: 20px;
+      font-size: 32px;
     }
 
-    #timer {
+    #timer span {
       font-size: 50px;
       font-weight: bold;
-      margin-top: 20px;
-      color: #ffffff;
-      text-shadow: 0 0 10px #000;
+      margin: 0 10px;
     }
 
     #specialMessage {
-      font-size: 28px;
+      font-size: 26px;
       margin-top: 40px;
       display: none;
       animation: fadeIn 2s forwards;
@@ -76,39 +68,121 @@
       pointer-events: none;
       z-index: 0;
     }
+
+    .carousel {
+      display: none;
+      margin: 50px auto;
+      width: 80%;
+      max-width: 600px;
+    }
+
+    .carousel img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      transition: transform 0.5s ease;
+    }
+
+    .letter {
+      margin: 60px auto;
+      padding: 20px;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      display: none;
+      animation: fadeIn 2s forwards;
+    }
+
+    .letter p {
+      font-size: 20px;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    .wishes {
+      margin: 60px auto;
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      border-radius: 20px;
+      display: none;
+    }
+
+    .wishes h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .wish {
+      background: rgba(255,255,255,0.1);
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
 
 <canvas id="fireworks"></canvas>
 
-<div class="container">
-  <h1 id="headline">Countdown to Your Special Day! 🎉</h1>
-  <div id="countdown">
-    <div id="timer">
-      <span id="days">00</span> Days
-      <span id="hours">00</span> Hours
-      <span id="minutes">00</span> Minutes
-      <span id="seconds">00</span> Seconds
-    </div>
-  </div>
-
-  <div id="specialMessage">
-    <p>🎂 Happy Birthday to the Queen of My Heart, Rimsha! 🎂</p>
-    <p>Today, the stars, the moon, and the sun all shine just for you. ✨</p>
-    <p>May your life be as beautiful as your soul. 💖</p>
-    <p>Love you forever and beyond! 🚀🌟</p>
+<h1 id="headline">Countdown to Your Special Day! 🎉</h1>
+<div id="countdown">
+  <div id="timer">
+    <span id="days">00</span> Days
+    <span id="hours">00</span> Hours
+    <span id="minutes">00</span> Minutes
+    <span id="seconds">00</span> Seconds
   </div>
 </div>
 
+<div id="specialMessage">
+  <p>🎂 Happy Birthday to the Queen of My Heart, Rimsha! 🎂</p>
+  <p>Today, the stars, the moon, and the sun all shine just for you. ✨</p>
+  <p>May your life be as beautiful as your soul. 💖</p>
+  <p>Love you forever and beyond! 🚀🌟</p>
+</div>
+
+<!-- Romantic Photo Carousel -->
+<div class="carousel" id="carousel">
+  <img id="carouselImage" src="images/photo1.jpg" alt="Rimsha" />
+</div>
+
+<!-- Love Letter -->
+<div class="letter" id="letter">
+  <h2>💌 A Letter For You</h2>
+  <p>
+    My Dearest Rimsha,
+
+    On this magical day, I just want you to know how grateful I am for your love.
+    Your smile lights up my darkest days, and your presence is my biggest blessing.
+
+    You are more than my love — you're my world, my heart, and my forever.
+
+    Happy Birthday, my love. I can’t wait to celebrate every one of your birthdays until we’re old and gray.
+
+    Yours always,
+    ❤️
+  </p>
+</div>
+
+<!-- Birthday Wishes -->
+<div class="wishes" id="wishes">
+  <h2>🎈 Birthday Wishes from Friends</h2>
+  <div class="wish">"Happy Birthday Rimsha! May all your dreams come true!" – Sarah</div>
+  <div class="wish">"Wishing you endless love and laughter today and always!" – Ahsan</div>
+  <div class="wish">"To the most amazing soul – have a magical birthday!" – Maria</div>
+</div>
+
+<!-- Audio -->
 <audio id="birthdaySong" loop>
   <source src="your-music.mp3" type="audio/mpeg" />
 </audio>
 
 <script>
-  // Get the next birthday (May 14). Adjust year if it's already passed.
+  // Set target date to May 14
   const today = new Date();
-  let nextBirthday = new Date(today.getFullYear(), 4, 14); // Month 4 = May
+  let nextBirthday = new Date(today.getFullYear(), 4, 14);
   if (today > nextBirthday) {
     nextBirthday = new Date(today.getFullYear() + 1, 4, 14);
   }
@@ -138,9 +212,11 @@
       document.getElementById('headline').innerHTML = "🎉 Happy Birthday, Rimsha! 🎉";
       document.getElementById('countdown').style.display = "none";
       document.getElementById('specialMessage').style.display = "block";
+      document.getElementById('carousel').style.display = "block";
+      document.getElementById('letter').style.display = "block";
+      document.getElementById('wishes').style.display = "block";
       fireworks.start();
 
-      // Require user interaction to play audio (browsers limit autoplay)
       Swal.fire({
         title: '🎂 Happy Birthday, My Dearest Rimsha! 🎂',
         html: 'Wishing you oceans of happiness and endless love! 💖✨<br>Today is YOUR day!',
@@ -165,8 +241,22 @@
     document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
   }
 
-  updateCountdown();
   setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Carousel
+  const images = [
+    "images/photo1.jpg",
+    "images/photo2.jpg",
+    "images/photo3.jpg"
+  ];
+  let current = 0;
+  setInterval(() => {
+    if (hasCelebrated) {
+      current = (current + 1) % images.length;
+      document.getElementById("carouselImage").src = images[current];
+    }
+  }, 3000);
 </script>
 
 </body>
