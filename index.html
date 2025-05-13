@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Happy Birthday Rimsha!</title>
 
-  <!-- Fonts & Libraries -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.1.0/dist/index.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -13,18 +12,17 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(135deg, #d9afd9 0%, #97d9e1 100%);
+      background: url('https://i.imgur.com/fRAV3M1.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #fff;
-      overflow-x: hidden;
+      overflow: hidden;
       text-align: center;
     }
 
     h1 {
       font-family: 'Dancing Script', cursive;
       font-size: 70px;
-      margin-top: 40px;
       background: linear-gradient(90deg, #ff6ec4, #7873f5);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -36,28 +34,29 @@
       to { text-shadow: 0 0 25px #fff, 0 0 30px #7873f5; }
     }
 
-    #timer span {
-      font-size: 50px;
-      font-weight: bold;
-      margin: 0 10px;
+    .container {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 20px;
     }
 
-    #specialMessage, .carousel, .letter, .wishes {
+    #timer {
+      font-size: 50px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    #specialMessage {
+      font-size: 24px;
+      margin-top: 40px;
       display: none;
       animation: fadeIn 2s forwards;
-      margin: 40px auto;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
-    }
-
-    .wishes .wish {
-      background: rgba(255,255,255,0.1);
-      margin: 10px;
-      padding: 10px;
-      border-radius: 10px;
     }
 
     canvas#fireworks {
@@ -72,37 +71,34 @@
 
     #cake {
       display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      width: 300px;
-      animation: fadeIn 1s ease-in-out;
+      width: 250px;
+      margin: 40px auto;
+      animation: fadeInOut 20s forwards;
     }
 
-    /* Floating hearts and roses */
-    .float {
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+
+    .floating {
       position: fixed;
-      width: 30px;
-      animation: float 10s infinite;
-      z-index: 1;
+      animation: float 10s linear infinite;
+      pointer-events: none;
+      z-index: 999;
     }
 
     @keyframes float {
-      0% {
-        bottom: 0;
-        opacity: 0;
-        transform: translateX(0) scale(0.5);
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        bottom: 100%;
-        opacity: 0;
-        transform: translateX(100px) scale(1);
-      }
+      0% { transform: translateY(100vh) rotate(0); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    .carousel img {
+      width: 80%;
+      border-radius: 20px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -110,123 +106,108 @@
 
 <canvas id="fireworks"></canvas>
 
-<h1 id="headline">Countdown to Your Special Day! 🎉</h1>
-<div id="countdown">
+<div class="container">
+  <h1 id="headline">Countdown to Your Special Day! 🎉</h1>
   <div id="timer">
     <span id="days">00</span> Days
     <span id="hours">00</span> Hours
     <span id="minutes">00</span> Minutes
     <span id="seconds">00</span> Seconds
   </div>
+
+  <div id="specialMessage">
+    <p>🎂 Happy Birthday to the Queen of My Heart, Rimsha! 🎂</p>
+    <p>May your smile always shine bright like the stars ✨</p>
+    <p>You're the melody of my heart and the light of my life 💖</p>
+    <p>Every moment with you is a celebration! 🎉</p>
+    <p>Love you forever and beyond! 🚀💫</p>
+  </div>
+
+  <img id="cake" src="https://i.imgur.com/I5T2gzr.png" alt="Cake" />
+
+  <div class="carousel">
+    <img id="carouselImage" src="https://i.imgur.com/Os9YZ.jpg" alt="Birthday Image" />
+  </div>
 </div>
 
-<div id="specialMessage">
-  <p>🎂 Happy Birthday to the Queen of My Heart, Rimsha! 🎂</p>
-  <p>Today, the stars, the moon, and the sun all shine just for you. ✨</p>
-  <p>May your life be as beautiful as your soul. 💖</p>
-  <p>Love you forever and beyond! 🚀🌟</p>
-</div>
-
-<!-- Cake Cutting -->
-<img id="cake" src="cake.gif" alt="Cake Cutting" />
-
-<!-- Romantic Photo Carousel -->
-<div class="carousel" id="carousel">
-  <img id="carouselImage" src="images/photo1.jpg" alt="Rimsha" style="width: 80%; border-radius: 20px;" />
-</div>
-
-<!-- Love Letter -->
-<div class="letter" id="letter">
-  <h2>💌 A Letter For You</h2>
-  <p>
-    My Dearest Rimsha,
-
-    On this magical day, I just want you to know how grateful I am for your love.
-    Your smile lights up my darkest days, and your presence is my biggest blessing.
-
-    You are more than my love — you're my world, my heart, and my forever.
-
-    Happy Birthday, my love. I can’t wait to celebrate every one of your birthdays until we’re old and gray.
-
-    Yours always,
-    ❤️
-  </p>
-</div>
-
-<!-- Birthday Wishes -->
-<div class="wishes" id="wishes">
-  <h2>🎈 Birthday Wishes from Friends</h2>
-  <div class="wish">"Happy Birthday Rimsha! May all your dreams come true!" – Sarah</div>
-  <div class="wish">"Wishing you endless love and laughter today and always!" – Ahsan</div>
-  <div class="wish">"To the most amazing soul – have a magical birthday!" – Maria</div>
-  <div class="wish">"You deserve all the happiness in the world. Happy Birthday!" – Momina</div>
-  <div class="wish">"Keep smiling and stay blessed! 🎉" – Taha</div>
-  <div class="wish">"You're a gem, Rimsha! Have a dazzling birthday!" – Hira</div>
-</div>
-
-<!-- Birthday Music -->
 <audio id="birthdaySong" autoplay loop>
-  <source src="your-music.mp3" type="audio/mpeg" />
+  <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg" />
 </audio>
 
 <script>
   const nextBirthday = new Date('2025-05-14T00:00:00');
-  const fireworks = new Fireworks.default(document.getElementById('fireworks'), { particles: 250 });
+  const fireworks = new Fireworks.default(document.getElementById('fireworks'), {
+    rocketsPoint: 50,
+    hue: { min: 0, max: 360 },
+    delay: { min: 30, max: 60 },
+    speed: 2,
+    acceleration: 1.05,
+    friction: 0.97,
+    gravity: 1.5,
+    particles: 250,
+    trace: 3,
+    explosion: 6
+  });
 
   const audio = document.getElementById('birthdaySong');
-  let hasCelebrated = false;
+  const cake = document.getElementById('cake');
 
-  function floatHeartsAndRoses() {
-    const emojis = ['💖', '🌹'];
-    for (let i = 0; i < 30; i++) {
-      const span = document.createElement('span');
-      span.className = 'float';
-      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      span.style.left = Math.random() * 100 + 'vw';
-      span.style.fontSize = Math.random() * 20 + 20 + 'px';
-      document.body.appendChild(span);
-      setTimeout(() => span.remove(), 10000);
-    }
+  const images = [
+    "https://i.imgur.com/Os9YZ.jpg",
+    "https://i.imgur.com/KN7Fz0p.jpg",
+    "https://i.imgur.com/G0p2WmO.jpg",
+    "https://i.imgur.com/vn0EdO9.jpg",
+    "https://i.imgur.com/wZKzxKJ.jpg"
+  ];
+  let currentImage = 0;
+
+  function updateCarousel() {
+    const img = document.getElementById("carouselImage");
+    currentImage = (currentImage + 1) % images.length;
+    img.src = images[currentImage];
   }
 
-  function showCakeAndThenFloat() {
-    const cake = document.getElementById('cake');
-    cake.style.display = 'block';
-    setTimeout(() => {
-      cake.style.display = 'none';
-      floatHeartsAndRoses();
-      setInterval(floatHeartsAndRoses, 8000);
-    }, 20000); // Hide cake after 20s
+  setInterval(updateCarousel, 4000);
+
+  function floatHeartsAndRoses() {
+    const emojis = ['💖', '🌹', '❤️', '💘', '💕'];
+    for (let i = 0; i < 40; i++) {
+      const el = document.createElement('div');
+      el.classList.add('floating');
+      el.style.left = `${Math.random() * 100}vw`;
+      el.style.fontSize = `${Math.random() * 24 + 24}px`;
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(el);
+
+      setTimeout(() => el.remove(), 10000);
+    }
   }
 
   function updateCountdown() {
     const now = new Date();
     const diff = nextBirthday - now;
 
-    if (diff <= 0 && !hasCelebrated) {
-      hasCelebrated = true;
-
+    if (diff <= 0) {
       document.getElementById('headline').innerHTML = "🎉 Happy Birthday, Rimsha! 🎉";
-      document.getElementById('countdown').style.display = "none";
+      document.getElementById('timer').style.display = "none";
       document.getElementById('specialMessage').style.display = "block";
-      document.getElementById('carousel').style.display = "block";
-      document.getElementById('letter').style.display = "block";
-      document.getElementById('wishes').style.display = "block";
-
       fireworks.start();
-
-      // Try autoplay
-      audio.play().catch(() => {
-        Swal.fire({
-          title: '🎂 Happy Birthday, My Dearest Rimsha!',
-          html: 'Tap OK to hear your song! 🎵',
-          icon: 'success',
-          confirmButtonText: 'Play Music'
-        }).then(() => audio.play());
+      audio.play();
+      Swal.fire({
+        title: '🎂 Happy Birthday, My Dearest Rimsha! 🎂',
+        html: 'Wishing you oceans of happiness and endless love! 💖✨<br>Today is YOUR day!',
+        icon: 'success',
+        confirmButtonText: 'Aww, thank you! 💝'
       });
 
-      // Cake after 30s
-      setTimeout(showCakeAndThenFloat, 30000);
+      setTimeout(() => {
+        cake.style.display = 'block';
+      }, 30000); // show cake after 30s
+
+      setTimeout(() => {
+        cake.style.display = 'none';
+        floatHeartsAndRoses();
+      }, 50000); // hide cake after 20s more
 
       return;
     }
@@ -236,27 +217,14 @@
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
 
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
   }
 
   setInterval(updateCountdown, 1000);
   updateCountdown();
-
-  // First click fallback
-  document.addEventListener('click', () => audio.play().catch(() => {}), { once: true });
-
-  // Carousel
-  const images = ["images/photo1.jpg", "images/photo2.jpg", "images/photo3.jpg"];
-  let current = 0;
-  setInterval(() => {
-    if (hasCelebrated) {
-      current = (current + 1) % images.length;
-      document.getElementById("carouselImage").src = images[current];
-    }
-  }, 3000);
 </script>
 
 </body>
