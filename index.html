@@ -16,7 +16,7 @@
       padding: 0;
       font-family: 'Open Sans', sans-serif;
       background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-      color: #fff;
+      color: #ffd9ec; /* Light romantic pink */
       overflow-x: hidden;
       text-align: center;
     }
@@ -25,39 +25,55 @@
       font-family: 'Dancing Script', cursive;
       font-size: 70px;
       margin-top: 40px;
-      background: linear-gradient(90deg, #ff6ec4, #7873f5);
+      background: linear-gradient(90deg, #ff69b4, #ffb6c1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: glow 2s ease-in-out infinite alternate;
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 15px #fff, 0 0 20px #ff6ec4; }
-      to { text-shadow: 0 0 25px #fff, 0 0 30px #7873f5; }
+      from { text-shadow: 0 0 15px #fff, 0 0 20px #ff69b4; }
+      to { text-shadow: 0 0 25px #fff, 0 0 30px #ffb6c1; }
     }
 
     #timer span {
       font-size: 50px;
       font-weight: bold;
       margin: 0 10px;
+      color: #fff0f5; /* Soft lavender */
     }
 
-    #specialMessage, .letter, .wishes {
+    #specialMessage {
+      display: none;
+      animation: fadeIn 2s forwards;
+      margin: 40px auto;
+      color: #ffe4e1; /* Misty Rose */
+    }
+
+    .letter {
+      display: none;
+      animation: fadeIn 2s forwards;
+      margin: 40px auto;
+      color: #fff8f0; /* Light pastel beige */
+    }
+
+    .wishes {
       display: none;
       animation: fadeIn 2s forwards;
       margin: 40px auto;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
     .wishes .wish {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.15);
       margin: 10px;
       padding: 10px;
       border-radius: 10px;
+      color: #ffffff; /* White for contrast */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .float {
